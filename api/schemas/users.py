@@ -4,7 +4,8 @@ from pydantic import BaseModel
 
 
 class UserInput(BaseModel):
-    """ data definitions """
+    """data definitions"""
+
     fullname: str
     email: str
     mobile: str
@@ -12,19 +13,22 @@ class UserInput(BaseModel):
     role: str
 
     class Config:
-        """ set orm mode"""
+        """set orm mode"""
+
         orm_mode = True
 
 
 class UserUpdate(BaseModel):
-    """ user schema to update """
+    """user schema to update"""
+
     fullname: Optional[str] = None
     email: Optional[str] = None
     password: Optional[str] = None
 
 
 class UserAuth(BaseModel):
-    """ user schema to generate token """
+    """user schema to generate token"""
+
     mobile: str
     password: str
 

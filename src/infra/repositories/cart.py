@@ -11,12 +11,13 @@ from src.infra.helpers.cart import CartHelper
 
 
 class CartRepository:
-    """ user repository """
+    """user repository"""
+
     def __init__(self, database: Session):
         self.database = database
 
     async def add_to_cart(self, product: CartSchema):
-        """ add product to cart """
+        """add product to cart"""
 
         new = Cart(
             user_id=product.user_id,
@@ -25,13 +26,12 @@ class CartRepository:
             product_price=product.product_price,
             quantity=product.quantity,
             status=product.status,
-            
-            subtotal=await CartHelper(self.database) \
-                .subtotal(product.product_price, product.quantity),
-            
-            total=await CartHelper(self.database) \
-                .total(product.product_price, product.quantity)
-
+            subtotal=await CartHelper(self.database).subtotal(
+                product.product_price, product.quantity
+            ),
+            total=await CartHelper(self.database).total(
+                product.product_price, product.quantity
+            ),
         )
         self.database.add(new)
         self.database.commit()
@@ -45,17 +45,18 @@ class CartRepository:
         return cart_list
 
     async def update_by_id(self, cart_id: int, payload):
-        cart = self.database.query(Cart).filter(Cart.id == cart_id).first()     
+        cart = self.database.query(Cart).filter(Cart.id == cart_id).first()
         cart.quantity = payload.quantity
-        
-        cart.subtotal = await CartHelper(self.database) \
-            .subtotal(cart.product_price, payload.quantity)
-        
-        cart.total = await CartHelper(self.database) \
-            .total(cart.product_price, payload.quantity)
+
+        cart.subtotal = await CartHelper(self.database).subtotal(
+            cart.product_price, payload.quantity
+        )
+
+        cart.total = await CartHelper(self.database).total(
+            cart.product_price, payload.quantity
+        )
 
         self.database.commit()
         self.database.refresh(cart)
 
         return cart
-

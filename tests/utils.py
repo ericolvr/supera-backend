@@ -7,13 +7,14 @@ create_user = {
     "mobile": "11 900789267",
     "email": "johny@doe.com",
     "password": "johny12345",
-    "role": "CLIENT"
+    "role": "CLIENT",
 }
 
 login_user = {
     "mobile": "11 988776655",
     "password": "mary12345",
 }
+
 
 async def get_token():
     async with AsyncClient(app=app, base_url="http://test") as ac:

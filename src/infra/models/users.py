@@ -8,12 +8,15 @@ from src.infra.configs.database import Base
 
 
 class EnumStatus(IntEnum):
-    """ user types """
+    """user types"""
+
     CLIENT = 0
     ADMIN = 1
-    
+
+
 class User(Base):
-    """ user defintions """
+    """user defintions"""
+
     __tablename__ = "users"
     id = Column(Integer, primary_key=True)
     fullname = Column(String(100), unique=True, index=True)
@@ -21,6 +24,6 @@ class User(Base):
     email = Column(String(100), unique=True)
     password = Column(String(100))
     role = Column(Enum(EnumStatus))
-    created_at = Column(DateTime(timezone=True),
-                        server_default=func.now(), nullable=True)
-    
+    created_at = Column(
+        DateTime(timezone=True), server_default=func.now(), nullable=True
+    )
