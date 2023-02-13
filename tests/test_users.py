@@ -36,7 +36,7 @@ async def test_list_user_pagination_limit():
 
 @pytest.mark.asyncio
 async def test_list_user_offset_pagination():
-    async with AsyncClient(app=app, base_url="http://test") as ax: # cache -> check
+    async with AsyncClient(app=app, base_url="http://test") as ax:  # cache -> check
         token = await get_token()
         response = await ax.get(
             "/users/?offset=1&limit=1",

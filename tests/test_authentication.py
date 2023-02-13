@@ -3,10 +3,7 @@ from httpx import AsyncClient
 from src.main import app
 
 
-user = {
-    "mobile": "11 988776655",
-    "password": "mary12345"
-}
+user = {"mobile": "11 988776655", "password": "mary12345"}
 
 
 @pytest.mark.asyncio()

@@ -10,27 +10,30 @@ from src.infra.repositories.cart import CartRepository
 
 
 cart_routes = APIRouter(
-    prefix='/cart',
+    prefix="/cart",
 )
 
 
-@cart_routes.post('/', status_code=status.HTTP_201_CREATED)
-async def add_to_cart(product: CartSchema, 
-    database: Session = Depends(get_database)):
-    """ add to cart """
+@cart_routes.post("/", status_code=status.HTTP_201_CREATED)
+async def add_to_cart(product: CartSchema, database: Session = Depends(get_database)):
+    """add to cart"""
     product = await CartRepository(database).add_to_cart(product)
     return product
 
 
-@cart_routes.get('/items/{items}')
-async def get_items(items: Optional[str] = None, database: Session = Depends(get_database)):
-    """ get items from cart """
+@cart_routes.get("/items/{items}")
+async def get_items(
+    items: Optional[str] = None, database: Session = Depends(get_database)
+):
+    """get items from cart"""
     items = await CartRepository(database).get_items(items)
     return items
 
 
-@cart_routes.post('/update/{cart_id}')
-async def update_by_id(cart_id: int, payload: CartUpdate, database: Session = Depends(get_database)):
-    """ update product data by name """
+@cart_routes.post("/update/{cart_id}")
+async def update_by_id(
+    cart_id: int, payload: CartUpdate, database: Session = Depends(get_database)
+):
+    """update product data by name"""
     cart = await CartRepository(database).update_by_id(cart_id, payload)
     return cart

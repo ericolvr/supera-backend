@@ -5,7 +5,8 @@ from pydantic import BaseModel
 
 
 class PurchaseSchema(BaseModel):
-    """ data definitions """
+    """data definitions"""
+
     user_id: int
     product_id: int
     product_name: str
@@ -16,5 +17,6 @@ class PurchaseSchema(BaseModel):
     total: Optional[Decimal] = None
 
     class Config:
-        """ set orm mode """
-        orm_mode=True
+        """set orm mode"""
+
+        orm_mode = True
